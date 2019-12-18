@@ -6,17 +6,29 @@ export default class Counter extends Component {
     }
 
     render() {
-        const { counter, onDelete, onIncrement } = this.props;
-
+        const { counter, onDelete, onIncrement, onDecrement } = this.props;
+        const disabled = counter.value > 0 ? false : true;
         return (
-            <div>
-                <span className={this.getBadgeClasses()}>{this.formartValue()}</span>
-                <button onClick={() => onIncrement(counter)} className="btn btn-secondary btn-sm">
-                    Increment
-                </button>
-                <button onClick={() => onDelete(counter.id)} className="btn btn-danger btn-sm m-3">
-                    Delete
-                </button>
+            <div className="row">
+                <div className="col-1">
+                    <span className={this.getBadgeClasses()}>{this.formartValue()}</span>
+                </div>
+
+                <div className="col">
+                    <button onClick={() => onIncrement(counter)} className="btn btn-secondary btn-sm">
+                        +
+                    </button>
+                    <button
+                        onClick={() => onDecrement(counter)}
+                        className="btn btn-secondary btn-sm m-2"
+                        disabled={disabled}
+                    >
+                        -
+                    </button>
+                    <button onClick={() => onDelete(counter.id)} className="btn btn-danger btn-sm">
+                        x
+                    </button>
+                </div>
             </div>
         );
     }
